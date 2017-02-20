@@ -18,10 +18,10 @@ page.ignoreButton.addEventListener('click', (e) => {
 			() => {
 				alert("Vulnerabilities on the page " + urlWithoutFragment + " will no longer be reported.");
 			},
-	(error) => {
-		alert("There was a problem when adding " + urlWithoutFragment + " to the ignore list.");
-		console.error(error);
-	});
+			(error) => {
+				alert("There was a problem when adding " + urlWithoutFragment + " to the ignore list.");
+				console.error(error);
+			});
 });
 
 // Show the report element now that it's been filled out.
