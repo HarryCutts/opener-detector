@@ -1,0 +1,7 @@
+{
+	"manifest_version": 2,
+	"name": "window.opener vulnerability detector",
+	"version": "0.1",
+
+	"description": "Checks for window.opener vulnerabilities as you browse."
+}
