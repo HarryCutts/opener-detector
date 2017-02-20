@@ -2,8 +2,25 @@
 <html>
 	<head>
 		<title>Vulnerability detected!</title>
+		<style>
+			#report {
+				display: none;
+			}
+			#report.ready {
+				display: block;
+			}
+		</style>
 	</head>
 	<body>
-		Oh no! The link you just clicked exposed window.opener!
+		<p>
+			Oh no! The link you just clicked exposed window.opener!
+		</p>
+		<div id="report">
+			<p>
+				The page at <a id="sourcePageLink" href="javascript:void"></a> exposed its <code>window</code> object to a page that it opened.
+			</p>
+		</div>
+
+		<script src="vuln_report_page.js"></script>
 	</body>
 </html>
