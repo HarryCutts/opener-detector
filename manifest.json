@@ -5,6 +5,8 @@
 
 	"description": "Checks for window.opener vulnerabilities as you browse.",
 
+	"permissions": ["storage"],
+
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
