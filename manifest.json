@@ -3,5 +3,12 @@
 	"name": "window.opener vulnerability detector",
 	"version": "0.1",
 
-	"description": "Checks for window.opener vulnerabilities as you browse."
+	"description": "Checks for window.opener vulnerabilities as you browse.",
+
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["check.js"]
+		}
+	]
 }
