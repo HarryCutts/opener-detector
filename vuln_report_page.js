@@ -6,6 +6,7 @@ const page = {
 	report: document.getElementById('report'),
 	sourcePageLink: document.getElementById('sourcePageLink'),
 	ignoreButton: document.getElementById('ignoreButton'),
+	ignoreDomainButton: document.getElementById('ignoreDomainButton'),
 };
 
 page.sourcePageLink.setAttribute('href', fragmentObj.sourceURL);
@@ -19,6 +20,18 @@ page.ignoreButton.addEventListener('click', (e) => {
 			},
 			(error) => {
 				alert("An error occurred when adding the page to the ignore list. (See console for details.)");
+				console.error(error);
+			});
+});
+
+page.ignoreDomainButton.addEventListener('click', (e) => {
+	e.preventDefault();
+	IgnoreList.addOrigin(fragmentObj.sourceURL).then(
+			(origin) => {
+				alert(`Vulnerabilities on the origin ${origin} will no longer be reported.`);
+			},
+			(error) => {
+				alert("An error occurred when adding the origin to the ignore list. (See console for details.)");
 				console.error(error);
 			});
 });
