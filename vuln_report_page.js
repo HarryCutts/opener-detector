@@ -8,6 +8,7 @@ const page = {
 	targetPageLink: document.getElementById('targetPageLink'),
 	ignoreButton: document.getElementById('ignoreButton'),
 	ignoreDomainButton: document.getElementById('ignoreDomainButton'),
+	returnButton: document.getElementById('returnButton'),
 };
 
 page.sourcePageLink.setAttribute('href', fragmentObj.sourceURL);
@@ -38,6 +39,11 @@ page.ignoreDomainButton.addEventListener('click', (e) => {
 				alert("An error occurred when adding the origin to the ignore list. (See console for details.)");
 				console.error(error);
 			});
+});
+
+page.returnButton.addEventListener('click', (e) => {
+	e.preventDefault();
+	history.back();
 });
 
 // Show the report element now that it's been filled out.
