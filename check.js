@@ -1,5 +1,9 @@
 (function() {
 
+function log(message) {
+	console.info("window.opener vulnerability detector: " + message);
+}
+
 function getReportPageURL(sourceURL, targetURL) {
 	const fragmentObj = {
 		sourceURL: sourceURL,
@@ -13,13 +17,13 @@ if (window.opener) {
 	const currentOpenerLocation = window.opener.location.toString();
 	IgnoreList.checkFor(currentOpenerLocation).then((isOnIgnoreList) => {
 		if (!isOnIgnoreList) {
-			console.log("window.opener is SET. The opener is currently at " + currentOpenerLocation);
+			log("window.opener is SET! Opening report page.");
 			window.opener.location = getReportPageURL(currentOpenerLocation, location.toString());
 		} else {
-			console.log("window.opener is SET, but the vulnerable page is on the ignore list.");
+			log("window.opener is SET, but the vulnerable page or domain is on the ignore list.");
 		}
 	});
 } else {
-	console.log("window.opener is NOT SET.");
+	log("window.opener is not set.");
 }
 })();
