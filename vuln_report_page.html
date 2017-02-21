@@ -9,22 +9,29 @@
 				color: #333;
 				font-family: sans-serif;
 			}
+
 			.content-wrapper {
 				margin: auto;
 				width: 52em;
 			}
+
 			#report {
 				display: none;
 			}
 			#report.ready {
 				display: block;
 			}
+
 			.card {
 				border: 2px solid lightgray;
 				border-radius: 0.5em;
 				margin-bottom: 0.5em;
 				padding: 0 0.5em;
 			}
+			.card .label {
+				font-weight: bold;
+			}
+
 			#returnButton {
 				float: right;
 				font-weight: bold;
@@ -45,10 +52,10 @@
 			<div id="report">
 				<div class="card">
 					<p>
-						Vulnerable page: <a id="sourcePageLink" href="javascript:void"></a>
+						<span class="label">Vulnerable page:</span> <a id="sourcePageLink" href="javascript:void"></a>
 					</p>
 					<p>
-						Target of vulnerable link: <a id="targetPageLink" href="javascript:void"></a>
+						<span class="label">Target of vulnerable link:</span> <a id="targetPageLink" href="javascript:void"></a>
 					</p>
 				</div>
 				<button id="ignoreButton">Ignore this page in future</button>
