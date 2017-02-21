@@ -4,12 +4,25 @@
 		<meta charset="utf-8">
 		<title>window.opener vulnerability detector settings</title>
 		<style>
+			body {
+				font-family: sans-serif;
+			}
+			#ignoreListTextArea {
+				display: block;
+				width: 100%;
+				min-height: 7em;
+				resize: vertical;
+			}
 		</style>
 	</head>
 	<body>
-		<h1>Ignore list</h1>
-		<p>Pages with URLs which start with any of the following will not be checked for vulnerabilities:</p>
-		<textarea id="ignoreListTextArea" disabled>Loading ignore list...</textarea>
+		<h2>Ignore list</h2>
+		<p>
+			Pages with URLs which start with any of the following will not be checked for vulnerabilities (include protocol):
+		</p>
+		<textarea id="ignoreListTextArea" disabled placeholder="e.g. https://www.example.com/">
+			Loading ignore list...
+		</textarea>
 		<button id="saveButton" disabled>Save</button>
 		<script src="ignore_list.js"></script>
 		<script src="options.js"></script>
