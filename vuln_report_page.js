@@ -5,12 +5,16 @@ const fragmentObj = JSON.parse(decodeURIComponent(location.hash.slice(1)));
 const page = {
 	report: document.getElementById('report'),
 	sourcePageLink: document.getElementById('sourcePageLink'),
+	targetPageLink: document.getElementById('targetPageLink'),
 	ignoreButton: document.getElementById('ignoreButton'),
 	ignoreDomainButton: document.getElementById('ignoreDomainButton'),
 };
 
 page.sourcePageLink.setAttribute('href', fragmentObj.sourceURL);
 page.sourcePageLink.innerText = fragmentObj.sourceURL;
+
+page.targetPageLink.setAttribute('href', fragmentObj.targetURL);
+page.targetPageLink.innerText = fragmentObj.targetURL;
 
 page.ignoreButton.addEventListener('click', (e) => {
 	e.preventDefault();

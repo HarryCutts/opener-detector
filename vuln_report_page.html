@@ -13,12 +13,21 @@
 		</style>
 	</head>
 	<body>
+		<h1><code>window.opener</code> vulnerability detected</h1>
 		<p>
-			Oh no! The link you just clicked exposed window.opener!
+			Oh no! The link you just clicked exposed <code>window.opener</code>!
+		</p>
+		<p>
+			The vulnerability was detected by the <code>window.opener</code> Vulnerability Detector extension. As a reminder,
+			<a href="https://mathiasbynens.github.io/rel-noopener/">this article by Mathias Bynens</a> summarizes this type
+			of vulnerability nicely. The report card below has some details on this particular occurrence.
 		</p>
 		<div id="report">
 			<p>
-				The page at <a id="sourcePageLink" href="javascript:void"></a> exposed its <code>window</code> object to a page that it opened.
+				Vulnerable page: <a id="sourcePageLink" href="javascript:void"></a>
+			</p>
+			<p>
+				Target of vulnerable link: <a id="targetPageLink" href="javascript:void"></a>
 			</p>
 			<button id="ignoreButton">Ignore this page in future</button>
 			<button id="ignoreDomainButton">Ignore this domain in future</button>
