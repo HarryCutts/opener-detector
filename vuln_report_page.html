@@ -4,33 +4,52 @@
 		<meta charset="utf-8">
 		<title>Vulnerability detected!</title>
 		<style>
+			body {
+				background: #fbfbfb;
+				color: #333;
+				font-family: sans-serif;
+			}
+			.content-wrapper {
+				margin: auto;
+				width: 52em;
+			}
 			#report {
 				display: none;
 			}
 			#report.ready {
 				display: block;
 			}
+			.card {
+				border: 2px solid lightgray;
+				border-radius: 0.5em;
+				margin-bottom: 0.5em;
+				padding: 0 0.5em;
+			}
 		</style>
 	</head>
 	<body>
-		<h1><code>window.opener</code> vulnerability detected</h1>
-		<p>
-			Oh no! The link you just clicked exposed <code>window.opener</code>!
-		</p>
-		<p>
-			The vulnerability was detected by the <code>window.opener</code> Vulnerability Detector extension. As a reminder,
-			<a href="https://mathiasbynens.github.io/rel-noopener/">this article by Mathias Bynens</a> summarizes this type
-			of vulnerability nicely. The report card below has some details on this particular occurrence.
-		</p>
-		<div id="report">
+		<div class="content-wrapper">
+			<h1><code>window.opener</code> vulnerability detected</h1>
 			<p>
-				Vulnerable page: <a id="sourcePageLink" href="javascript:void"></a>
+				Oh no! The link you just clicked exposed <code>window.opener</code>!
 			</p>
 			<p>
-				Target of vulnerable link: <a id="targetPageLink" href="javascript:void"></a>
+				The vulnerability was detected by the <code>window.opener</code> Vulnerability Detector extension. As a reminder,
+				<a href="https://mathiasbynens.github.io/rel-noopener/">this article by Mathias Bynens</a> summarizes this type
+				of vulnerability nicely. The report card below has some details on this particular occurrence.
 			</p>
-			<button id="ignoreButton">Ignore this page in future</button>
-			<button id="ignoreDomainButton">Ignore this domain in future</button>
+			<div id="report">
+				<div class="card">
+					<p>
+						Vulnerable page: <a id="sourcePageLink" href="javascript:void"></a>
+					</p>
+					<p>
+						Target of vulnerable link: <a id="targetPageLink" href="javascript:void"></a>
+					</p>
+				</div>
+				<button id="ignoreButton">Ignore this page in future</button>
+				<button id="ignoreDomainButton">Ignore this domain in future</button>
+			</div>
 		</div>
 
 		<script src="ignore_list.js"></script>
