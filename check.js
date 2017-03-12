@@ -1,7 +1,7 @@
 (function() {
 
 function log(message) {
-	console.info("window.opener vulnerability detector: " + message);
+	console.info("Opener Detector: " + message);
 }
 
 function getReportPageURL(sourceURL, targetURL) {
