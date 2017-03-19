@@ -11,8 +11,17 @@ const page = {
 	returnButton: document.getElementById('returnButton'),
 };
 
-page.sourcePageLink.setAttribute('href', fragmentObj.sourceURL);
-page.sourcePageLink.innerText = fragmentObj.sourceURL;
+if (fragmentObj.sourceURL !== null) {
+	page.sourcePageLink.setAttribute('href', fragmentObj.sourceURL);
+	page.sourcePageLink.innerText = fragmentObj.sourceURL;
+} else {
+	page.sourcePageLink.removeAttribute('href');
+	page.sourcePageLink.innerText =
+		"(Unknown, since this was a cross-origin link with no referrer. Click \"Return to the page\" to see it.)";
+	// Disable the ignore buttons, since adding '' to the ignore list would mess things up.
+	page.ignoreButton.disabled = true
+	page.ignoreDomainButton.disabled = true
+}
 
 page.targetPageLink.setAttribute('href', fragmentObj.targetURL);
 page.targetPageLink.innerText = fragmentObj.targetURL;
