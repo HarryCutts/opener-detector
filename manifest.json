@@ -24,10 +24,5 @@
 				"check.js"
 			]
 		}
-	],
-
-	"web_accessible_resources": [
-		"vuln_report_page.html",
-		"vuln_report_page.js"
 	]
 }
