@@ -3,18 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Vulnerability detected!</title>
+		<link rel="stylesheet" href="page.css">
 		<style>
-			body {
-				background: #fbfbfb;
-				color: #333;
-				font-family: sans-serif;
-			}
-
-			.content-wrapper {
-				margin: auto;
-				max-width: 52em;
-			}
-
 			#report {
 				display: none;
 			}
@@ -35,6 +25,15 @@
 			#returnButton {
 				float: right;
 				font-weight: bold;
+			}
+
+			.about-link {
+				clear: right;
+				color: gray;
+				display: block;
+				font-size: small;
+				padding: 1em 0;
+				text-align: center;
 			}
 		</style>
 	</head>
@@ -62,6 +61,8 @@
 				<button id="ignoreDomainButton">Ignore this domain in future</button>
 				<button id="returnButton">Return to the page</button>
 			</div>
+
+			<a class="about-link" href="about.html" target="_blank" rel="noopener noreferrer">About Opener Detector</a>
 		</div>
 
 		<script src="ignore_list.js"></script>

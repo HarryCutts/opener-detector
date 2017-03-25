@@ -1,0 +1,10 @@
+body {
+	background: #fbfbfb;
+	color: #333;
+	font-family: sans-serif;
+}
+
+.content-wrapper {
+	margin: auto;
+	max-width: 52em;
+}
