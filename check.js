@@ -22,7 +22,7 @@ function tryToGetOpenerLocation() {
 	}
 }
 
-if (window.opener) {
+if (window.opener && window.opener !== window) {
 	const currentOpenerLocation = tryToGetOpenerLocation();
 	if (currentOpenerLocation) {
 		IgnoreList.checkFor(currentOpenerLocation).then((isOnIgnoreList) => {
@@ -37,6 +37,8 @@ if (window.opener) {
 		log("window.opener is SET, but the ignore list couldn't be checked as the link was cross-origin with no referrer.");
 		window.opener.location = getReportPageURL(location.toString());
 	}
+} else if (window.opener === window) {
+	log("window.opener is set, but equal to window, and therefore harmless.");
 } else {
 	log("window.opener is not set.");
 }
