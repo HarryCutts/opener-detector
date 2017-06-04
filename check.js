@@ -18,6 +18,7 @@ function tryToGetOpenerLocation() {
 		return window.opener.location.toString();
 	} catch (ex) {
 		// Permission denied, probably because the opener is in a different domain.
+		// (`window.opener` is still assignable, however, so the vulnerability still exists.)
 		return document.referrer;
 	}
 }
