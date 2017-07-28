@@ -1,47 +1,39 @@
 (function() {
-window.IgnoreList = {
+const VERSION = '0.1';
+
+window.IgnoreList = class {
+	constructor(list) {
+		this._list = list;
+	}
+
 	getItems() {
-		return browser.storage.local.get('ignoreList').then((result) => {
-			// Work around Firefox <52 bug https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/storage/StorageArea/get#Return_value
-			const resultObj = Array.isArray(result) ? result[0] : result;
-			if (!resultObj.ignoreList) return [];
-			return resultObj.ignoreList;
-		});
-	},
+		return this._list;
+	}
 
 	setItems(ignoreList) {
-		return browser.storage.local.set({ignoreList});
-	},
+		this._list = ignoreList;
+	}
 
 	add(url) {
-		return browser.storage.local.get('ignoreList').then((result) => {
-			const ignoreList = result.ignoreList || [];
-			const canonicalUrl = removeQueryAndFragment(url);
-			if (ignoreList.indexOf(url) !== -1) return;
-			ignoreList.push(canonicalUrl);
-			return this.setItems(ignoreList).then(() => canonicalUrl);
-		});
-	},
+		const canonicalUrl = removeQueryAndFragment(url);
+		if (this._list.indexOf(canonicalUrl) !== -1) return;
+		this._list.push(canonicalUrl);
+		return canonicalUrl;
+	}
 
 	addOrigin(url) {
-		return browser.storage.local.get('ignoreList').then((result) => {
-			const ignoreList = result.ignoreList || [];
-			const origin = getOrigin(url);
-			if (ignoreList.indexOf(origin) !== -1) return;
-			ignoreList.push(origin);
-			return this.setItems(ignoreList).then(() => origin);
-		});
-	},
+		const origin = getOrigin(url);
+		if (this._list.indexOf(origin) !== -1) return;
+		this._list.push(origin);
+		return origin;
+	}
 
 	checkFor(url) {
-		return this.getItems().then((ignoreList) => {
-			for (let ignoredURL of ignoreList) {
-				if (url.startsWith(ignoredURL)) return true;
-			}
-			return false;
-		});
-		// TODO: handle storage error
-	},
+		for (let ignoredUrl of this._list) {
+			if (url.startsWith(ignoredUrl)) return true;
+		}
+		return false;
+	}
 };
 
 function removeQueryAndFragment(urlString) {
@@ -56,4 +48,46 @@ function getOrigin(urlString) {
 	// Add a slash to the end to prevent bad matches (e.g. "https://foo.co" shouldn't match "https://foo.com")
 	return url.origin.endsWith('/') ? url.origin : url.origin + '/';
 }
+
+const DEFAULT_CONFIG = {
+	version: VERSION,  // TODO: read the version from manifest.json when needed.
+	ignoreList: [],
+};
+
+window.OpenerDetectorConfig = class {
+	static get() {
+		return browser.storage.local.get().then((result) => {
+			// Work around Firefox <52 bug https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/storage/StorageArea/get#Return_value
+			const resultObj = Array.isArray(result) ? result[0] : result;
+			if (!resultObj.version) {
+				Object.assign(resultObj, DEFAULT_CONFIG);
+				const config = new window.OpenerDetectorConfig(resultObj);
+				config.save();
+				return config;
+			} else {
+				return new window.OpenerDetectorConfig(resultObj);
+			}
+		});
+	}
+
+	constructor(storageObj) {
+		this._storageObj = storageObj;
+		this._ignoreList = null;
+	}
+
+	getIgnoreList() {
+		if (!this._ignoreList) {
+			this._ignoreList = new IgnoreList(this._storageObj.ignoreList);
+		}
+		return this._ignoreList;
+	}
+
+	save() {
+		if (this._ignoreList) {
+			this._storageObj.ignoreList = this._ignoreList.getItems();
+		}
+		return browser.storage.local.set(this._storageObj);
+		// TODO: handle storage errors
+	}
+};
 })();

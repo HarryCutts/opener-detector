@@ -26,7 +26,8 @@ function tryToGetOpenerLocation() {
 if (window.opener && window.opener !== window) {
 	const currentOpenerLocation = tryToGetOpenerLocation();
 	if (currentOpenerLocation) {
-		IgnoreList.checkFor(currentOpenerLocation).then((isOnIgnoreList) => {
+		OpenerDetectorConfig.get().then((config) => {
+			const isOnIgnoreList = config.getIgnoreList().checkFor(currentOpenerLocation);
 			if (!isOnIgnoreList) {
 				log("window.opener is SET! Opening report page.");
 				window.opener.location = getReportPageURL(location.toString(), currentOpenerLocation);

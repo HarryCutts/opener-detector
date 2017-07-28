@@ -26,28 +26,33 @@ if (fragmentObj.sourceURL !== null) {
 page.targetPageLink.setAttribute('href', fragmentObj.targetURL);
 page.targetPageLink.innerText = fragmentObj.targetURL;
 
-page.ignoreButton.addEventListener('click', (e) => {
-	e.preventDefault();
-	IgnoreList.add(fragmentObj.sourceURL).then(
-			(url) => {
-				alert(`Vulnerabilities on the page ${url} will no longer be reported.`);
+function saveConfig(config, successMessage) {
+	config.save().then(
+			() => {
+				alert(successMessage);
 			},
 			(error) => {
-				alert("An error occurred when adding the page to the ignore list. (See console for details.)");
+				alert("An error occurred when adding to the ignore list. (See console for details.)");
 				console.error(error);
 			});
+}
+
+page.ignoreButton.addEventListener('click', (e) => {
+	e.preventDefault();
+	OpenerDetectorConfig.get().then((config) => {
+		const ignoreList = config.getIgnoreList();
+		const canonicalURL = ignoreList.add(fragmentObj.sourceURL);
+		saveConfig(config, `Vulnerabilities on the page ${canonicalURL} will no longer be reported.`);
+	});
 });
 
 page.ignoreDomainButton.addEventListener('click', (e) => {
 	e.preventDefault();
-	IgnoreList.addOrigin(fragmentObj.sourceURL).then(
-			(origin) => {
-				alert(`Vulnerabilities on the origin ${origin} will no longer be reported.`);
-			},
-			(error) => {
-				alert("An error occurred when adding the origin to the ignore list. (See console for details.)");
-				console.error(error);
-			});
+	OpenerDetectorConfig.get().then((config) => {
+		const ignoreList = config.getIgnoreList();
+		const canonicalOrigin = ignoreList.addOrigin(fragmentObj.sourceURL);
+		saveConfig(config, `Vulnerabilities on the origin ${canonicalOrigin} will no longer be reported.`);
+	});
 });
 
 page.returnButton.addEventListener('click', (e) => {
