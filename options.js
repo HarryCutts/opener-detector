@@ -1,6 +1,7 @@
 (function() {
 const page = {
 	ignoreListTextArea: document.getElementById('ignoreListTextArea'),
+	reportSameOriginCheckbox: document.getElementById('reportSameOriginCheckbox'),
 	saveButton: document.getElementById('saveButton'),
 };
 
@@ -17,6 +18,7 @@ OpenerDetectorConfig.get().then((config) => {
 			}
 		}
 		ignoreList.setItems(newList);
+		config.setReportSameOriginVulnerabilities(page.reportSameOriginCheckbox.checked);
 		config.save().then(
 				() => {
 					alert("Changes saved.");
@@ -28,9 +30,11 @@ OpenerDetectorConfig.get().then((config) => {
 	});
 
 	page.ignoreListTextArea.value = ignoreList.getItems().join('\n');
+	page.reportSameOriginCheckbox.checked = config.getReportSameOriginVulnerabilities();
 
-	// Activate the text area now that it has content in it
+	// Activate the page controls now that their values are correct
 	page.ignoreListTextArea.disabled = false;
+	page.reportSameOriginCheckbox.disabled = false;
 	page.saveButton.disabled = false;
 });
 })();

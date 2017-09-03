@@ -52,6 +52,7 @@ function getOrigin(urlString) {
 const DEFAULT_CONFIG = {
 	version: VERSION,  // TODO: read the version from manifest.json when needed.
 	ignoreList: [],
+	reportSameOriginVulnerabilities: false,
 };
 
 window.OpenerDetectorConfig = class {
@@ -80,6 +81,14 @@ window.OpenerDetectorConfig = class {
 			this._ignoreList = new IgnoreList(this._storageObj.ignoreList);
 		}
 		return this._ignoreList;
+	}
+
+	getReportSameOriginVulnerabilities() {
+		return this._storageObj.reportSameOriginVulnerabilities;
+	}
+
+	setReportSameOriginVulnerabilities(reportSameOriginVulnerabilities) {
+		this._storageObj.reportSameOriginVulnerabilities = reportSameOriginVulnerabilities;
 	}
 
 	save() {

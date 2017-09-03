@@ -23,16 +23,25 @@ function tryToGetOpenerLocation() {
 	}
 }
 
+function haveSameOrigin(a, b) {
+	const urlA = new URL(a);
+	const urlB = new URL(b);
+	return urlA.origin === urlB.origin;
+}
+
 if (window.opener && window.opener !== window) {
 	const currentOpenerLocation = tryToGetOpenerLocation();
 	if (currentOpenerLocation) {
 		OpenerDetectorConfig.get().then((config) => {
 			const isOnIgnoreList = config.getIgnoreList().checkFor(currentOpenerLocation);
-			if (!isOnIgnoreList) {
+			const ignoreBecauseSameOrigin =
+				!config.getReportSameOriginVulnerabilities()
+				&& haveSameOrigin(location.toString(), currentOpenerLocation);
+			if (!isOnIgnoreList && !ignoreBecauseSameOrigin) {
 				log("window.opener is SET! Opening report page.");
 				window.opener.location = getReportPageURL(location.toString(), currentOpenerLocation);
 			} else {
-				log("window.opener is SET, but the vulnerable page or domain is on the ignore list.");
+				log("window.opener is SET, but ignoring the vulnerability due to your current settings.");
 			}
 		});
 	} else {
