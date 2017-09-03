@@ -20,7 +20,7 @@
 		{
 			"matches": ["<all_urls>"],
 			"js": [
-				"ignore_list.js",
+				"config.js",
 				"check.js"
 			]
 		}
