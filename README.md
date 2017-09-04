@@ -1,7 +1,7 @@
 Opener Detector
 ===============
 
-**A simple Firefox extension which checks for [`window.opener` vulnerabilities][article] as you browse.** When it finds one, it shows a warning page in the vulnerable tab, so that you can report or fix the vulnerability. (Use the back button to return to the page.) Pages or whole sites can be added to an ignore list.
+**A simple browser extension which checks for [`window.opener` vulnerabilities][article] as you browse.** When it finds one, it shows a warning page in the vulnerable tab, so that you can report or fix the vulnerability. (Use the back button to return to the page.) Pages or whole sites can be added to an ignore list.
 
 `window.opener` vulnerabilities allow Web pages to control the tab which opened them. They can be fixed on [many browsers][caniuse] simply by adding `rel=noopener` to your links. For more details, [check out Mathias Bynens' article][article].
 
