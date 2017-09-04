@@ -9,6 +9,9 @@ Opener Detector
 
 Contributions welcome! Check out the GitHub issues if you're looking for something to do.
 
+**Get it at:** [Chrome Web Store][chrome-store]
+
 [caniuse]: http://caniuse.com/#feat=rel-noopener
 [article]: https://mathiasbynens.github.io/rel-noopener/
 [white-hat]: https://en.wikipedia.org/wiki/White_hat_(computer_security)
+[chrome-store]: https://chrome.google.com/webstore/detail/opener-detector/glgmjdmfggnngmedfgccfdbhdjlfafin
