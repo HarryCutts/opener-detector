@@ -3,6 +3,7 @@ const page = {
 	ignoreListTextArea: document.getElementById('ignoreListTextArea'),
 	reportSameOriginCheckbox: document.getElementById('reportSameOriginCheckbox'),
 	saveButton: document.getElementById('saveButton'),
+	saveConfirmMessage: document.getElementById('saveConfirmMessage'),
 };
 
 OpenerDetectorConfig.get().then((config) => {
@@ -21,10 +22,12 @@ OpenerDetectorConfig.get().then((config) => {
 		config.setReportSameOriginVulnerabilities(page.reportSameOriginCheckbox.checked);
 		config.save().then(
 				() => {
-					alert("Changes saved.");
+					saveConfirmMessage.innerText = "Changes saved.";
+					saveConfirmMessage.style.display = 'block';
 				},
 				(error) => {
-					alert("An error occurred when saving the ignore list. (See console for details.)");
+					saveConfirmMessage.innerText = "An error occurred when saving the ignore list. (See console for details.)";
+					saveConfirmMessage.style.display = 'block';
 					console.error(error);
 				});
 	});
